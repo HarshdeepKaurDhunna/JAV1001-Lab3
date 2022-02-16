@@ -1,5 +1,6 @@
 package labClassesObjects;
 
+import java.util.List;
 
 /**
  * @author Name: Harshdeep Kaur Dhunna
@@ -29,6 +30,7 @@ public class DiceGame {
         System.out.println("Creating a default d6...");
         System.out.println("Creating a d20...");
         System.out.println("Creating percentile die (a special d10)...");
+        System.out.println("");
         System.out.println("The current side up for " + die.getDiceType() + " is " + die.getCurrentUpSide());
         System.out.println("The current side up for " + die2.getDiceType() + " is " + die2.getCurrentUpSide());
         System.out.println("The current side up for " + die3.getDiceType() + " is " + die3.getCurrentUpSide());
@@ -47,11 +49,14 @@ public class DiceGame {
         System.out.println("Rolling the " + die3.getDiceType() + "... ");
         System.out.println("The new value is " + die3.getCurrentUpSide());
 
+    }
+
+    public static void highestRoll() {
         Die dieRoll = new Die();
         int rollCount = 0;
         System.out.println("");
-        System.out.println("Rolling...... " + dieRoll.diceType +"  to show it's highest value");
-       
+        System.out.println("Rolling...... " + dieRoll.diceType + "  to show it's highest value");
+
         do {
             dieRoll.rollDice();
             System.out.println("The dice come up " + dieRoll.getCurrentUpSide());
@@ -60,4 +65,5 @@ public class DiceGame {
         System.out.println("\nIt took " + rollCount + " rolls to get a " + dieRoll.getSidesNumber());
     }
 
+   
 }
