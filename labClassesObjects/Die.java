@@ -17,19 +17,27 @@ public class Die {
     }
 
     public Die(int sidesNumber) {
-        this.sidesNumber = sidesNumber;
         diceType = "D20";
+        this.sidesNumber = sidesNumber;
         rollDice();
     }
 
     public Die(String diceType, int sidesNumber) {
-        this.sidesNumber = sidesNumber;
         this.diceType = diceType;
+        this.sidesNumber = sidesNumber;
         rollDice();
     }
 
     public void rollDice() {
-        currentUpSide = (int) ((Math.random() * sidesNumber) + 1);
+       
+        if(this.diceType.equals("Percentile")){
+            int percentileDice = 100;
+            currentUpSide = (int) ((Math.random() * sidesNumber));
+            percentileDice = (int) ((Math.random() * percentileDice));
+            currentUpSide = currentUpSide + percentileDice;
+        }else{
+            currentUpSide = (int) ((Math.random() * sidesNumber) + 1);
+        }
     }
 
     public String getDiceType() {

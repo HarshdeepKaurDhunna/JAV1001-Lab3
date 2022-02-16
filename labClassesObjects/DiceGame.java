@@ -49,8 +49,9 @@ public class DiceGame {
 
         Die dieRoll = new Die();
         int rollCount = 0;
-        System.out.println("The new value is " + dieRoll.getCurrentUpSide());
-
+        System.out.println("");
+        System.out.println("Rolling...... " + dieRoll.diceType +"  to show it's highest value");
+       
         do {
             dieRoll.rollDice();
             System.out.println("The dice come up " + dieRoll.getCurrentUpSide());
