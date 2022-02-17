@@ -1,5 +1,6 @@
 package labClassesObjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,25 +22,27 @@ public class DiceGame {
      */
     public static void main(String[] args) {
 
-        Die die = new Die();
-
-        Die die2 = new Die(20);
-
-        Die die3 = new Die("Percentile", 10);
+        Die die = new Die(); // Calling 0 argument default constructor by intiating Die class
+        Die die2 = new Die(20); // Calling 1 argument default constructor 
+        Die die3 = new Die("Percentile", 10); // Calling 2 argument default constructor
 
         System.out.println("Creating a default d6...");
         System.out.println("Creating a d20...");
         System.out.println("Creating percentile die (a special d10)...");
         System.out.println("");
+
+        //using the objects and accessors of Die class to retrieving value to print the each Die's type and current Up side 
         System.out.println("The current side up for " + die.getDiceType() + " is " + die.getCurrentUpSide());
         System.out.println("The current side up for " + die2.getDiceType() + " is " + die2.getCurrentUpSide());
         System.out.println("The current side up for " + die3.getDiceType() + " is " + die3.getCurrentUpSide());
         System.out.println("");
 
-        die = new Die();
-        die2 = new Die(20);
-        die3 = new Die("Percentile", 10);
+        //Rolling the dice again by calling rollDice() method from objects of die class
+        die.rollDice(); 
+        die2.rollDice(); 
+        die3.rollDice(); 
 
+        //Print the new generated random value from rollDice() method
         System.out.println("Testing the roll method");
         System.out.println("");
         System.out.println("Rolling the " + die.getDiceType() + "...");
@@ -48,22 +51,68 @@ public class DiceGame {
         System.out.println("The current side up for " + die2.getDiceType() + " is " + die2.getCurrentUpSide());
         System.out.println("Rolling the " + die3.getDiceType() + "... ");
         System.out.println("The new value is " + die3.getCurrentUpSide());
+        
+        getHighestRoll(die);  //Method call to print highest value of D6 passing its object as method argument;
+        getAllEqualRoll(); //Method call to print 5 of a kind of D6
 
     }
 
-    public static void highestRoll() {
-        Die dieRoll = new Die();
+    /**
+     * Prints Highest value od D6
+     */
+    public static void getHighestRoll(Die dieRoll) {
         int rollCount = 0;
         System.out.println("");
         System.out.println("Rolling...... " + dieRoll.diceType + "  to show it's highest value");
 
+        //while loop to check the highest number of dice
         do {
-            dieRoll.rollDice();
+            dieRoll.rollDice();  //Rolling the dice again by calling rollDice() method from objects of die class
             System.out.println("The dice come up " + dieRoll.getCurrentUpSide());
-            rollCount++;
+            rollCount++; // Increment by 1 to get no of counts
         } while (dieRoll.getCurrentUpSide() != dieRoll.getSidesNumber());
+
         System.out.println("\nIt took " + rollCount + " rolls to get a " + dieRoll.getSidesNumber());
     }
 
-   
+    /**
+     * print 5 of a kind of D6
+     */
+    public static void getAllEqualRoll() {
+
+        //Create a array list of Die object 
+        List<Die> DieList = new ArrayList<Die>();
+        for(int i=0; i < 5; i++) {
+            Die die = new Die();
+            DieList.add(die);
+        }
+        int rollCount = 0;
+
+        System.out.println("");
+        System.out.println("Rolling...... 5 D6 to get 5 of a kind");
+        System.out.println("");
+
+        ArrayList<Integer> currentSideList; // array list contains current side up of each die to compare them 
+
+        //loop to check if the side are equal or not
+        do {
+            DieList.get(0).rollDice();
+            DieList.get(1).rollDice();
+            DieList.get(2).rollDice();
+            DieList.get(3).rollDice();
+            DieList.get(4).rollDice();
+            rollCount++;
+            currentSideList = new ArrayList<Integer>();
+            currentSideList.add(DieList.get(0).getCurrentUpSide());
+            currentSideList.add(DieList.get(1).getCurrentUpSide());
+            currentSideList.add(DieList.get(2).getCurrentUpSide());
+            currentSideList.add(DieList.get(3).getCurrentUpSide());
+            currentSideList.add(DieList.get(4).getCurrentUpSide());
+           
+            //Java 8 streams check if all element of list are equal or not
+        } while (currentSideList.stream().distinct().count() != 1);
+        System.out.println("Equal Sides of 5 D6 " + currentSideList.toString().replaceAll("^.|.$", ""));
+        System.out.println("");
+        System.out.println("YAHTZEE!!!!!!!! It took " + rollCount + " rolls"); 
+    } 
 }
