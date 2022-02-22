@@ -61,18 +61,10 @@ public class DiceGame {
      * Prints Highest value od D6
      */
     public static void getHighestRoll(Die dieRoll) {
-        int rollCount = 0;
         System.out.println("");
-        System.out.println("Rolling...... " + dieRoll.diceType + "  to show it's highest value");
-
-        //while loop to check the highest number of dice
-        do {
-            dieRoll.rollDice();  //Rolling the dice again by calling rollDice() method from objects of die class
-            System.out.println("The dice come up " + dieRoll.getCurrentUpSide());
-            rollCount++; // Increment by 1 to get no of counts
-        } while (dieRoll.getCurrentUpSide() != dieRoll.getSidesNumber());
-
-        System.out.println("\nIt took " + rollCount + " rolls to get a " + dieRoll.getSidesNumber());
+        System.out.println("Setting the d6 to show 6...");
+        dieRoll.setCurrentUpSide(6);
+        System.out.println("The side up is now " + dieRoll.getCurrentUpSide() + ". Finally.");
     }
 
     /**
